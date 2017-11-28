@@ -1,0 +1,40 @@
+﻿@model _60322_SPITSYN.Models.PageListViewModel<Shop.DAL.Entities.SportInv>
+
+@using System.Text;
+
+@{
+    StringBuilder result = new StringBuilder();
+    var i = 0;
+    TagBuilder row = new TagBuilder("div");
+
+    foreach (var item in Model)
+    {
+        i++;
+        if (i == 1)
+        {
+            row = new TagBuilder("div");
+            row.AddCssClass("row");
+            row.AddCssClass("item-row");
+        }
+
+        row.InnerHtml += Html.Partial("ItemPartial", item);
+
+        if (i == 3)
+        {
+            result.Append(row.ToString());
+            // i = 0;
+        }
+    }
+
+    if (i != 3)
+    {
+        result.Append(row.ToString());
+        i = 0;
+    }
+}
+
+@MvcHtmlString.Create(result.ToString())
+
+@Html.Partial("PagerPartial", Model)
+
+

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Главная";
+}
+<div class="row">
+    <div class="col-md-4 col-md-offset-3">
+        <h1 class="glyphicon glyphicon-thumbs-up"></h1>
+        <h2>@ViewBag.MyText</h2>
+        <h1 class="glyphicon glyphicon-thumbs-up"></h1>>
+    </div>
+</div>
+
+<h2>Список</h2>
+<ol type="A">
+    @for (int i = 1; i < 5; i++)
+    {
+        <li>элемент @i списка</li>
+    }
+</ol>
+<hr />
+<h2>Форма</h2>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <div class="col-md-offset-2">
+            <label>@Html.CheckBox("chbx1")Чек-бокс1</label><br />
+        </div>
+        <div class="col-md-offset-2">
+            <label>@Html.CheckBox("chbx2")Чек-бокс2</label><br />
+        </div>
+        <div class="col-md-offset-2">
+            <label>@Html.RadioButton("rbtn", 1, true)Радио-1</label>
+            <label>@Html.RadioButton("rbtn", 2, false)Радио-2</label>
+        </div>
+
+        <div class="col-md-8 col-md-offset-3">
+            @Html.DropDownList("Colors")
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail" class="col-md-2 control-label">Логин</label>
+        <div class="col-md-8">
+            @Html.TextBox("login", null, new { @class = "form-control", placeholder = "Введите логин" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword" class="col-md-2 control-label">Пароль</label>
+        <div class="col-md-8">
+            @Html.Password("password", null, new { @class = "form-control", placeholder = "Введите пароль" })
+        </div>
+    </div>
+
+    <div class="col-md-offset-2">
+        <button type="submit" class="btn btn-warning">Отправить</button>
+    </div>
+
+}
+
+@section SidePanel
+    {
+        <h4><i>Пример работы с секциями на странице шаблона</i></h4>
+    }

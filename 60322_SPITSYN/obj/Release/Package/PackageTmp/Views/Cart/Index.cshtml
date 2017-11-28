@@ -1,0 +1,43 @@
+﻿@model _60322_SPITSYN.Models.Cart
+
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ваша корзина</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Фото товара</th>
+            <th>Наименование</th>
+            <th>Вес</th>
+            <th>Количество</th>
+            <th>Цена за единицу</th>
+            <th>Всего по позиции</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GetItems())
+        {
+            <tr>
+                <td>
+                    <img width="50" height="50" src="@Url.Action("GetImage", "SportInv", new{SportInvId=item.SportInv.SportInvId })"
+                         class="img-thumbnail">
+                </td>
+                <td>@item.SportInv.SportInvName</td>
+                <td>@item.SportInv.Weight </td>
+                <td>@item.quantity</td>
+                <td>@item.SportInv.Price</td>
+                <td>@(item.SportInv.Price*item.quantity)</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3">Всего</td>
+            <td>@Model.GetTotal()</td>
+        </tr>
+    </tbody>
+</table>
+<a href="@TempData["returnUrl"]" class="btn btn-info">Назад</a>
+

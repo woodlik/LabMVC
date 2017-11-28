@@ -1,0 +1,18 @@
+﻿@model _60322_SPITSYN.Models.PageListViewModel<Shop.DAL.Entities.SportInv>
+
+@using System.Text;
+@{
+    ViewBag.Title = "Товары";
+}
+
+<h2>Список товаров</h2>
+<div id="List">
+    @Html.Partial("ListViewPatial", Model);
+</div>
+
+
+@section SidePanel
+{
+    @Html.Action("Side", "Menu")
+}
+

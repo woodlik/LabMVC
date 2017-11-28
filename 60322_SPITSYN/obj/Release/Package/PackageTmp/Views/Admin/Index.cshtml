@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Shop.DAL.Entities.SportInv>
+
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Администрирование</h2>
+
+<p>
+    @Html.ActionLink("Создать товар", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Фото
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SportInvName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img width="50" height="50" src="@Url.Action("GetImage", "SportInv", new{SportInvId=item.SportInvId })"
+                      class="img-thumbnail">
+            </td>
+            <td>
+                @Html.ActionLink(Html.DisplayFor(modelItem => item.SportInvName).ToString(),
+                                    "Edit", new { id = item.SportInvId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                |@Html.ActionLink("Удалить", "Delete", new { id = item.SportInvId })|
+            </td>
+        </tr>
+    }
+
+</table>

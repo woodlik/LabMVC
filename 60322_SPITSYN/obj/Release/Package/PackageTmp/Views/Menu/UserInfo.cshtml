@@ -1,0 +1,12 @@
+﻿<div class="nav navbar-left">
+        <a href=@Url.Action("Login","Account") class="navbar-link">
+            <span class="glyphicon glyphicon-user">Войти</span>
+        </a>
+        <a href=@Url.Action("Register","Account") class="navbar-link">
+            <span class="glyphicon glyphicon-plus-sign">Зарегистрироваться</span>
+        </a>
+    </div>
+
+    <div class="nav navbar-right">
+        @Html.Action("CartSummary", "Cart")
+    </div>

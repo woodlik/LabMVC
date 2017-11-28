@@ -1,0 +1,66 @@
+﻿@model application.Models.PageListViewModel<lab4.DAL.Entities.Products>
+@using System.Text
+
+
+@{
+    var categoryName = Request.RequestContext.RouteData.Values["category"];
+    var result = new StringBuilder();
+    //стрелка влево
+    var liPrevNext = new TagBuilder("li");
+    liPrevNext.InnerHtml = Ajax.ActionLink("<<", "List",
+        new { category = categoryName, page = Model.CurrentPage - 1 },
+        new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "First"
+        }).ToString();
+    if (Model.CurrentPage == 1)
+    {
+        liPrevNext.AddCssClass("disabled notActiveLink");
+    }
+    result.Append(liPrevNext.ToString());
+
+    //пейджер
+    //Метод InnerHtml помещает значение внутрь тэга(между <тэг> значение</тэгЮ
+    for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        var li = new TagBuilder("li");
+        //var a = new TagBuilder("a");
+        //a.MergeAttribute("href", Url.Action("List", new { page = i }));
+        //a.InnerHtml = i.ToString();
+        //li.InnerHtml = a.ToString();
+        //result.Append(li.ToString());
+        if (i == Model.CurrentPage)
+        {
+            li.AddCssClass("active");
+        }
+        li.InnerHtml = Ajax.RouteLink(i.ToString(),
+               new { action = "List", category = categoryName, page = i },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "First",
+                   InsertionMode = InsertionMode.Replace
+               }).ToString();
+        result.Append(li.ToString());
+    }
+    //стрелка вправо
+    liPrevNext = new TagBuilder("li");
+    liPrevNext.InnerHtml = Ajax.ActionLink(">>", "List",
+        new { category = categoryName, page = Model.CurrentPage + 1 },
+        new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "First",
+        }
+    ).ToString();
+    if (Model.CurrentPage == Model.TotalPages)
+    {
+        liPrevNext.AddCssClass("disabled notActiveLink");
+    }
+    result.Append(liPrevNext.ToString());
+}
+<div class="col-md-4 col-md-offset-3">
+    <ul class="pagination">
+        @MvcHtmlString.Create(result.ToString())
+    </ul>
+</div>

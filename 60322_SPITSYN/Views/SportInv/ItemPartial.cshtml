@@ -1,0 +1,31 @@
+﻿@model Shop.DAL.Entities.SportInv
+
+<div class='col-md-4'>
+    <div class='thumbnail'>
+        <div class="photo">
+            <img src="@Url.Action("getImage",new {SportInvId=Model.SportInvId })"
+                 alt='Нет изображения :-\\' />
+        </div>
+        <div class="caption">
+            <div class="item-name">
+                <h3>@Model.SportInvName</h3>
+            </div>
+            <div class="item-description">
+                @Model.Description
+            </div>
+            <div class="centered">
+                <p class="text-info">@Model.Weight килограмм</p>                
+            </div>
+            <div class="centered">
+                <h3 class="badge">@Model.Price рублей</h3>
+            </div>
+            <div class="centered">
+                <a class="btn btn-primary btn-block" href=@Url.Action("AddToCart", "Cart",new {id=Model.SportInvId, returnUrl=Request.Path} )>
+                    
+                      В корзину  
+                    
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿@model _60322_SPITSYN.Models.Cart
+
+<ul class="nav nav-pills navbar-right">
+    <li>
+        <p class="navbar-text">
+            В вашей корзине: @Model.GetItems().Count() наименований, @Model.GetTotal().ToString() руб.
+        </p>
+    </li>
+    <li>
+        @Html.ActionLink("Проверить заказ", "Index", "Cart",
+                        new { returnUrl = Request.Path },
+                        new { @class = "btn navbar-btn" })
+    </li>
+</ul>
